@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Interactive Web</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="01.css">
+    <!--
+        defer
+
+        비동기적 로드
+        HTML 로드와 파싱이 다끝난다음 실행됨
+         
+        DOMContentLoaded = 문서의 돔이 다 구성하고 난다음 발생하는 이벤트
+        DOMContentLoaded 직전에 이 스크립트(ex.js)가 실행됨    
+
+        외부스크립트로 연결해야 동작가능
+
+    -->
+    <!-- <script defer src="ex.js"></script> -->
+    <!--
+        async
+
+        비동기적 로드
+
+        실행 순서가 보장이 안됨
+        HTML 표시 하면서 바로 브라우저가 스크립트를 로드하는데
+
+        defer는 시점이 정해져 있음
+        HTML 로드와 파싱이 끝나고 DOMContentLoaded 이벤트 발생전에 실행된 반면에
+
+        defer랑 똑같이 백그라운드에서 알아서 다운로드되는데
+        본인이 다운로드가 끝나고 나면 
+        그때 바로 실행됨
+        다운로드가 HTML 로드 중간에 끝나면 그때 실행됨
+        HTML 로드 여부와 상관없이
+
+        HMTL 컨텐츠를 반드시 이용해야하는 스크립트는 부적합...
+        
+        내용하고 독립적이거나 따로 노는 애들 또는 독립적인 플러그인 사용할때 사용함
+
+        외부스크립트로 연결해야 동작가능
+    -->
+    <!-- <script async src="ex.js"></script> -->
+</head>
+<body>
+    <div class="characters">
+        <div class="ilbuni a">
+            <img src="images/ilbuni_0.png" alt="일분이">
+        </div>
+        <div class="ilbuni b">
+            <img src="images/ilbuni_1.png" alt="일분이">
+        </div>
+        <div class="ilbuni c">
+            <img src="images/ilbuni_2.png" alt="일분이">
+        </div>
+        <div class="ilbuni d">
+            <img src="images/ilbuni_3.png" alt="일분이">
+        </div>
+    </div>
+
+    <script>
+        // 직접 타이핑 해보세요
+        
+        // (function(){ // 즉시 함수 호출
+
+        // })();
+
+        /*
+            전역 변수는 최대한 피해야한다.
+            다른 개발자가 다른 파일에서 똑같은 변수를 사용하거나 함수를 사용하면 충돌하여 문제를 야기할수 있음.
+            그리 하여 블럭 안에 넣는다.
+            즉시 함수 호출
+
+        */
+
+        (function(){
+            const ilbuni = document.querySelector('.characters');
+            function clickHandler(/*이벤트 객체*/e){
+                /*
+                    this
+                    e.currentTarget
+                    이벤트 객체 안에서 this는 .characters 를 가르킴
+                */
+                // console.log(e.currentTarget);
+                // console.log(e.currentTarget);
+
+                /* 내가 지금 한 클릭한 애 */ 
+                console.log(e.target)
+            }
+            // addEventListener 가 등록되어있는 객체
+            ilbuni.addEventListener('click', clickHandler);
+
+        })();
+    </script>
+</body>
+</html>
