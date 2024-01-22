@@ -7,59 +7,47 @@
     <title>Interactive Web</title>
     <link rel="stylesheet" href="css/reset.css">
     <style>
-        .stage {
-            overflow: hidden;
-            position: relative;
-            width: 100vw;
-            height: 75vw;
-            background: #fff000;
+        /* vw 는 브라우저 폭 */
+        /* vh 는 브라우저 높이 */
+       .stage {position:relative;width:100vw;height:75vw;background:#999;overflow-x:hidden;}
+       @keyframes moving{
+        from {
+            transform:translateX(0);
         }
-        @keyframes moving {
-            from {
-                transform: translateX(0);
-            }
-            to {
-                transform: translateX(90vw);
-            }
+        to {
+            transform:translateX(90vw);
         }
-        .ilbuni {
-            position: absolute;
-            width: 100px;
-            height: 100px;
-            background-repeat: no-repeat;
-            background-position: 50% 50%;
-            background-size: contain;
-            animation: moving infinite alternate;
-        }
-        .ilbuni.a {
-            left: 5%;
-            bottom: 5%;
-            background-image: url('images/ilbuni_0.png');
-            animation-duration: 2s;
-        }
-        .ilbuni.b {
-            left: 10%;
-            bottom: 3%;
-            background-image: url('images/ilbuni_1.png');
-            animation-duration: 3s;
-        }
-        .ilbuni.c {
-            left: 7%;
-            bottom: 10%;
-            background-image: url('images/ilbuni_2.png');
-            animation-duration: 4s;
-        }
+       }
+       .log {position:absolute;width:100px;height:100px;border-radius:50%;animation:moving infinite alternate; }
+       .log.a {left:5%;bottom:5%;background-color:red;animation-duration:2s;}
+       .log.b {left:10%;bottom:5%;background-color:orange;animation-duration:3s;}
+       .log.c {left:7%;bottom:5%;background-color:yellow;animation-duration:4s;}
+
     </style>
 </head>
 <body>
+    
     <div class="stage">
-        <div class="ilbuni a"></div>
-        <div class="ilbuni b"></div>
-        <div class="ilbuni c"></div>
+        <div class="log a"></div>
+        <div class="log b"></div>
+        <div class="log c"></div>
     </div>
-
     <script>
         // 직접 타이핑 해보세요
+        (function(){
+            //
+            const stage = document.querySelector('.stage');
+            const logGroup = document.querySelectorAll('.log');
+            for(let i = 0; i < logGroup.length; i++){
+                function clickHandler(e){
+                    // console.log(this) // 클릭한 요소 찾기
+                    // console.log(e.currentTarget) // 이벤트 객체의 currentTarget을 잡기;
+                    // stage.removeChild(this); // 자식 없애서 제거하기
+                    this.parentNode.removeChild(this) // this.parentNode <- 부모를 가르킨다. 즉 부모의 자식(this)을 찾아서 없애준다.
+                }
+                logGroup[i].addEventListener('click', clickHandler);
+            }
+        })();
     </script>
 </body>
 </html>
